@@ -1,0 +1,1019 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Archives: 2014/3 | realguess</title>
+  <meta name="author" content="Chao Huang">
+  
+  <meta name="description" content="Just a blog about every detail encountered.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="realguess"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="realguess" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-45698182-1', 'realguess.net');
+  ga('send', 'pageview');
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">realguess</a></h1>
+  <h2><a href="/">Don't afraid to try!</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title">2014/3</h2>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-30T05:58:55.000Z"><a href="/2014/03/29/passing-environment-variables-from-cron-to-shell-script/">Mar 29, 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/29/passing-environment-variables-from-cron-to-shell-script/">Passing Environment Variables from Cron to Shell Script</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>In Debian system with Vixie cron, <a href="/2014/02/11/defining-correct-environment-for-coffeescript-in-cron/">environment variables can be defined</a> in the crontab:</p>
+<pre><code><span class="constant">MESSAGE</span>=<span class="constant">Hello</span> <span class="constant">World</span>
+* * * * * <span class="regexp">/bin/sh</span> ~<span class="regexp">/script.sh &gt;&gt; /tmp</span><span class="regexp">/script.log</code></pre>
+<p>Now, can the same environment variable <code>MESSAGE</code> be passed to the shell script <code>~/script.sh</code> that being scheduled to run every minute? Let&#39;s just give a try by adding the following line to <code>script.sh</code>:</p>
+<pre><code>echo <span class="string">"ECHO: <span class="subst">${MESSAGE}</span>"</span></code></pre>
+<p><code>tail -f /tmp/script.log</code>:</p>
+<pre><code><span class="attribute">ECHO</span>: <span class="string">Hello World</span>
+<span class="attribute">ECHO</span>: <span class="string">Hello World</span>
+<span class="attribute">ECHO</span>: <span class="string">Hello World</span></code></pre>
+<p>Therefore, the shell script will pick up the environment variables defined in crontab. This really is a convenience.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-29T17:44:53.000Z"><a href="/2014/03/29/amazon-aws-command-line-interface-cli/">Mar 29, 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/29/amazon-aws-command-line-interface-cli/">Amazon AWS Command Line Interface (CLI)</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>This is a brief guide for installing <a href="http://aws.amazon.com/cli/">AWS Command Line Interface (CLI)</a> on Ubuntu Linux.</p>
+<blockquote>
+<p>The AWS Command Line Interface (CLI)] is a unified tool to manage your AWS services. With just one tool to download and configure, you can control multiple AWS services from the command line and automate them through scripts. [2]</p>
+</blockquote>
+<p>The point here is <strong>unified</strong>, one tool to run all Amazon AWS services.</p>
+<h2>Install</h2>
+<p><em>The installation procedure applies to Ubuntu Linux with Zsh and Bash.</em></p>
+<p>Install <a href="http://www.pip-installer.org/en/latest/">pip</a>, a Python package manager:</p>
+<pre><code>$ su<span class="operator"><span class="keyword">do</span> apt-<span class="keyword">get</span> install python-pip</code></pre>
+<p>Install <em>awscli</em>:</p>
+<pre><code>$ su<span class="operator"><span class="keyword">do</span> pip install awscli</code></pre>
+<p>Install autocompletion:</p>
+<pre><code>$ which aws_zsh_completer<span class="variable">.sh</span>
+/usr/local/bin/aws_zsh_completer<span class="variable">.sh</span>
+$ source aws_zsh_completer<span class="variable">.sh</span></code></pre>
+<p>Add this line to <code>~/.zshrc</code> as well.</p>
+<p>Or for Bash <code>~/.bashrc</code>:</p>
+<pre><code><span class="char">$ </span>echo <span class="string">'\n# Enable AWS CLI autocompletion'</span> &gt;&gt; ~/.bashrc
+<span class="char">$ </span>echo <span class="string">'complete -C aws_completer aws'</span> &gt;&gt; ~/.bashrc
+<span class="char">$ </span>source ~/.bashrc</code></pre>
+<p>Test installation:</p>
+<pre><code><span class="variable">$ </span>which aws
+/usr/local/bin/aws
+<span class="variable">$ </span>aws help</code></pre>
+<p>Test autocompletion:</p>
+<pre><code>$ aws <span class="tag">&lt;<span class="title">tab</span>&gt;</span><span class="tag">&lt;<span class="title">tab</span>&gt;</span></code></pre>
+<p>You should see a list of all available AWS commands.</p>
+<h2>Usage</h2>
+<p>Before using aws-cli, you need to tell it about your AWS credentials. There are three ways to specify AWS credentials:</p>
+<ol>
+<li>Environment variables</li>
+<li>Config file</li>
+<li>IAM Role</li>
+</ol>
+<p>Using config file is preferred, which is a simple <a href="http://en.wikipedia.org/wiki/INI_file">ini</a> file format to be stored in <code>~/.aws/config</code>. A soft link can be used to link it or just tell awscli where to find it:</p>
+<pre><code><span class="variable">$ </span>export <span class="constant">AWS_CONFIG_FILE</span>=<span class="regexp">/path/to</span><span class="regexp">/config_file</code></pre>
+<p>It is better to use IAM roles with any of the AWS services:</p>
+<blockquote>
+<p>The final option for credentials is highly recommended if you are using aws-cli on an EC2 instance. IAM Roles are a great way to have credentials installed automatically on your instance. If you are using IAM Roles, aws-cli will find them and use them automatically. [4]</p>
+</blockquote>
+<p>The default output is in JSON format. Other formats are tab-delimited text and ASCII-formatted table. For example, using <code>--query</code> filter and table output:</p>
+<pre><code><span class="comment">$</span> <span class="comment">aws</span> <span class="comment">ec2</span> <span class="comment">describe</span>-<span class="comment">instances</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">query</span> <span class="comment">'Reservations</span>[<span class="comment">*</span>]<span class="string">.</span><span class="comment">Instances</span>[<span class="comment">*</span>]<span class="string">.</span><span class="comment">{</span> <span class="comment">\</span>
+  <span class="comment">ID:InstanceId</span>, <span class="comment">TYPE:InstanceType</span>, <span class="comment">ZONE:Placement</span>.<span class="comment">AvailabilityZone</span>, <span class="comment">\</span>
+  <span class="comment">SECURITY:SecurityGroups</span>[<span class="comment">0</span>]<span class="string">.</span><span class="comment">GroupId</span>, <span class="comment">KEY:KeyName</span>, <span class="comment">VPC:VpcId</span>, <span class="comment">\</span>
+  <span class="comment">STATE:State</span>.<span class="comment">Name}'</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">output</span> <span class="comment">table</code></pre>
+<p>This will print a nice looking table of all EC2 instances.</p>
+<p>The command line options also accept JSON format. But when passing in large blocks of data, referring a JSON file is much easier. Both local file and remote URL can be used.</p>
+<h2>Upgrade</h2>
+<p>To upgrade AWS CLI to the latest version:</p>
+<pre><code><span class="comment">$</span> <span class="comment">sudo</span> <span class="comment">pip</span> <span class="comment">install</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">upgrade</span> <span class="comment">awscli</code></pre>
+<h2>References</h2>
+<ol>
+<li><a href="http://aws.amazon.com/cli/">AWS Command Line Interface</a></li>
+<li><a href="http://docs.aws.amazon.com/cli/latest/userguide/">User Guide</a></li>
+<li><a href="http://docs.aws.amazon.com/cli/latest/reference/">Reference</a></li>
+<li><a href="https://github.com/aws/aws-cli/">GitHub repository</a></li>
+</ol>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-22T20:20:10.000Z"><a href="/2014/03/22/writing-custom-yeoman-generator/">Mar 22, 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/22/writing-custom-yeoman-generator/">Writing Custom Yeoman Generator</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Writing a custom <a href="http://yeoman.io/">Yeoman</a> generator, you need to install <a href="https://github.com/yeoman/generator-generator">generator-generator</a> first.</p>
+<blockquote>
+<p>(generator-generator) Scaffolds out a new basic Yeoman generator with some sensible defaults.</p>
+</blockquote>
+<p>So it creates some basic structure for writing your own custom generators. It is a generator for writing Node generator application.</p>
+<p>First Install generator-generator:</p>
+<pre><code>$ su<span class="operator"><span class="keyword">do</span> npm install -g generator-generator</code></pre>
+<p>Then generate some basic files for writing your own generator by issuing:</p>
+<pre><code><span class="variable">$ </span>yo generator</code></pre>
+<p>You can use generator-generator to write both a custom generator and a custom sub-generator. What is sub-generator? For example, Angular directive or service is a sub-generator.</p>
+<p>Use naming convention <code>generator-[name]</code>.</p>
+<p>Create a directory for your new generator:</p>
+<pre><code><span class="variable">$ </span>mkdir -p ~<span class="regexp">/generators/generator</span>-hello &amp;&amp; cd <span class="variable">$_</span></code></pre>
+<p>Make sure entering the newly created directory (<code>cd $_</code>), otherwise all files generated will be placed under the current directory. Then, scaffold your generator:</p>
+<pre><code><span class="variable">$ </span>yo generator</code></pre>
+<p>As versions yo@1.1.2 and generator-generator@0.4.3, the generator creates the following directories and files:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre></td><td class="code"><pre>.
+├── app
+│   ├── index<span class="variable">.js</span>
+│   └── templates
+├── <span class="variable">.editorconfig</span>
+├── <span class="variable">.gitattributes</span>
+├── <span class="variable">.gitignore</span>
+├── <span class="variable">.jshintrc</span>
+├── node_modules
+│   ├── <span class="variable">.bin</span>
+│   ├── chalk
+│   ├── mocha
+│   └── yeoman-generator
+├── package<span class="variable">.json</span>
+├── README<span class="variable">.md</span>
+├── test
+│   ├── test-creation<span class="variable">.js</span>
+│   └── test-load<span class="variable">.js</span>
+└── <span class="variable">.travis</span><span class="variable">.yml</span>
+
+<span class="number">8</span> directories, <span class="number">10</span> files
+</pre></td></tr></table></figure>
+
+<p>You might want to make your initial commit:</p>
+<pre><code>$ git init &amp;&amp; git add '*' &amp;&amp; git <span class="operator"><span class="keyword">commit</span> -m <span class="string">'Initial commit'</span></code></pre>
+<p>While in development, make it accessible globally:</p>
+<pre><code>$ su<span class="operator"><span class="keyword">do</span> npm link</code></pre>
+<p>This is similar to:</p>
+<pre><code>$ su<span class="operator"><span class="keyword">do</span> npm install -g [generator-name]</code></pre>
+<p>They both will be discoverable from <code>/usr/local/lib/node_modules</code>.</p>
+<p>There isn&#39;t much going on there, we need to customize our own generator. The main file is <code>./app/index.js</code>.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre>var HelloGenerator = yeoman<span class="preprocessor">.generators</span><span class="preprocessor">.Base</span><span class="preprocessor">.extend</span>({
+})<span class="comment">;</span>
+module<span class="preprocessor">.exports</span> = HelloGenerator<span class="comment">;</span>
+</pre></td></tr></table></figure>
+
+<p>The <code>HelloGenerator</code> extends <a href="https://github.com/yeoman/generator/blob/master/lib/base.js">Base</a> generator. There are four properties (functions) that it has extended: <code>init</code>, <code>askFor</code>, <code>app</code>, and <code>projectfiles</code>.</p>
+<p>All these functions will be invoked by Yeoman one by one in order (the order is important), meaning that <code>init</code> will be called first to perform initialization, and then <code>askFor</code> will be called to get user prompts, then <code>app</code> and <code>projectfiles</code> will be called afterward to build the application.</p>
+<p>However, it is not a must to have four properties, it just brings more structure and modularity. In fact, you can merge all four functions into a single one.</p>
+<p>The method name does not matter. Just don&#39;t name it <code>prompt</code> because you will override the existing property inherited from <code>yeoman.generators.Base</code>. </p>
+<p>If we need to declare a “private” property, just appending it with an underscore as a hidden property, e.g. <code>_dontAskFor: function(){}</code>, or if you just use it in the same file, you can simply define a global <code>function myFunc()</code>.</p>
+<p>Personal, I don&#39;t think it is necessary to break it into many functions, three are enough, initialization, prompting user for input, and generating files.</p>
+<p>When choosing property names, the <a href="https://github.com/yeoman/generator/blob/master/lib/base.js">Base</a> object contains many properties which is not a good idea to be overridden, such as <code>[&quot;append&quot;, &quot;help&quot;, &quot;log&quot;, &quot;prompt&quot;, &quot;remote&quot;]</code>. This design has limitation on choosing a right property name. For example, I was thinking about using <code>prompt</code> instead of <code>askFor</code>, but <code>prompt</code> is an inherited property. Therefore, it is a good idea to keep fewer properties in <code>HelloGenerator</code>. Three are enough. All these properties can be accessible from the context <code>this</code>. From <code>this</code> object you can access everything from <a href="https://github.com/yeoman/generator/blob/master/lib/base.js">Base</a> object to newly defined <code>_dontAskFor</code> hidden property.</p>
+<p>Time to test the custom generator:</p>
+<pre><code><span class="variable">$ </span>cd /tmp &amp;&amp; mkdir hello &amp;&amp; yo <span class="variable">$_</span></code></pre>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-08T06:30:00.000Z"><a href="/2014/03/07/traveling-from-the-big-apple-to-the-big-easy-via-amtrak-crescent/">Mar 7, 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/07/traveling-from-the-big-apple-to-the-big-easy-via-amtrak-crescent/">Traveling from the Big Apple to the Big Easy via Amtrak Crescent</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><img src="http://farm3.staticflickr.com/2839/13234934445_e1c993a278_n.jpg" alt="Amtrak Crescent"></p>
+<p>“That‘s 30 hours on the train, don’t you get sick?” Well, I told them that the actual trip is 80 hours, 30 hours are just from New York to New Orleans via <a href="http://www.amtrak.com/crescent-train">Amtrak Crescent</a>, the longer journey is from New Orleans to Los Angeles, which is close to 50 hours.</p>
+<p>Traveling by air is no fun. When you are at 30,000 feet high, there are only clouds accompanying you outside the small plane window. And no, you don‘t get sick watching ever-changing landscape. What’s sightseeing!</p>
+<p>This is the first part of the journey from the East Coast to the West Coast. Let&#39;s get started.</p>
+<h2>The Route</h2>
+<p><iframe src="https://www.google.com/maps/embed?pb=!1m29!1m12!1m3!1d25243787.08302642!2d-82.17110033425408!3d39.435045753675496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m14!1i0!3e3!4m5!1s0x89c259ae1434b7f9%3A0x3e64008c2728c60b!2sPenn+Station!3m2!1d40.75058!2d-73.99358!4m5!1s0x8620a5deb8e58bb9%3A0x975cfe51a0dc0e13!2sNew+Orleans+Union+Passenger+Terminal!3m2!1d29.946085!2d-90.078291!5e0!3m2!1sen!2sus!4v1395117149399" width="100%" height="600" frameborder="0" style="border:0"></iframe></p>
+
+<p>There is a <a href="/doc/2014-03-07/amtrak-crescent-train-route-guide.pdf">route guide</a>, but I found it not be much useful. An iOS or Android app with GPS enabled voice guide could be nice.</p>
+<p>The train travels from the Northeast to the South, crossing New York, New Jersey, Pennsylvania, Delaware, Maryland, DC, Virginia, North Carolina, South Carolina, Georgia, Alabama, Mississippi, and Louisiana (finally be able to spell them out without making a mistake). That&#39;s a lot of states. But from Virginia to South Carolina, it is night time, nothing too see at all. I was feeling the 9-to-5 schedule, sleep at 9pm and get up at 5am to catch the sunrise.</p>
+<h2>The Train</h2>
+<p><img src="http://farm4.staticflickr.com/3732/13236307315_74f2f7eaa9_c.jpg" alt="Amtrak Viewliner"></p>
+<p>On the Amtrak Crescent line, the train is called <a href="http://en.wikipedia.org/wiki/Viewliner">Viewliner</a>. Viewliner is small single deck comparing to <a href="http://en.wikipedia.org/wiki/Superliner_(railcar)">Superliner</a>. According to a train conductor, because of the tunnels in the East Coast, all the trains are Viewliners, but to the west of Chicago, there are all Superliners.</p>
+<p>The top windows on the car are for people who sleeping on the upper bunk in the room. That is really helpful for me to catch the outside view without climbing up and down.</p>
+<h2>The Car and the Room</h2>
+<p>We are on the right side of the train, but the side does not really matter on this route.</p>
+<p><img src="http://farm4.staticflickr.com/3666/13235649993_81edbca065_c.jpg" alt="Amtrak Viewliner Roomette"></p>
+<p>First step into my room, the room is not small at all. The thing you have to get used to is having a toilet next to your seat. But with the cover down, that is not a big deal. Flushing the toilet is just like in the airplane, pressurized system that sucks everything out.</p>
+<p><img src="http://farm3.staticflickr.com/2878/13235969244_1a4dd49565_c.jpg" alt="Table, sink and toilet"></p>
+<p>The only thing I do not like is the burning smell during each start the train. I need to adjust myself to the smell, so went to the end of car for some coffee and juice. There are light coffee and some apple and orange juices in containers. Don&#39;t expect any fancy even you are in the sleeping car.</p>
+<h2>The Food</h2>
+<p>During the stop on the Trenton, NJ, the dining service person came by for a dinner reservation. We booked the slot at 6:30pm. She was definitely from the south, the ascent tells it all.</p>
+<p>The dining room is pretty standard. The table on each side can be seated by four people. The only complaint I had was the heat coming from underneath the table. Too much heat and too dry.</p>
+<p><img src="http://farm8.staticflickr.com/7237/13257967684_dcc687cec4_c.jpg" alt="Steak and salmon"></p>
+<p>We ordered salmon and steak (medium rare). The steak did not look like a frozen food. But the sides probably are. We also ordered a small bottle of white wine ($6.50), enough for two glasses. I took a peek at the dining car kitchen, I saw the chef and the grill! That is a lot more than traveling on the plane.</p>
+<h2>The View</h2>
+<p>Talking about sightseeing. The ever-changing landscape can only be described by pictures.</p>
+<p>There are many bridges and overpasses coming from the Northeast.</p>
+<p><img src="http://farm3.staticflickr.com/2859/13256019574_b271de3cf1_c.jpg" alt="Bridges and overpasses"></p>
+<p>But once leaving the big cities, there are only lakes, trees and tracks waiting.</p>
+<p><img src="http://farm4.staticflickr.com/3807/13256907393_a313b182f3_c.jpg" alt="Large lakes and small ponds"></p>
+<p>Large lakes are really magnificent, but once a while there are small lakes or ponds hiding behind the trees. It is the never ending tree line.</p>
+<p><img src="http://farm8.staticflickr.com/7020/13257094184_7d4304efec_c.jpg" alt="Tree lines"></p>
+<p>And rolling green or yellowish grasses.</p>
+<p><img src="http://farm4.staticflickr.com/3822/13256859093_1ce4bdedd1_c.jpg" alt="Grasses"></p>
+<p>Moving away from the natural beauty, houses and communities are seen along the route.</p>
+<p><img src="http://farm8.staticflickr.com/7333/13257083434_f925f758c7_c.jpg" alt="Houses"></p>
+<p>There are different structures (some are abandoned), a car factory (Honda) and tanks from Anniston Army Depot.</p>
+<p><img src="http://farm8.staticflickr.com/7442/13256868083_e5c4109ed4_c.jpg" alt="Structures and tanks"></p>
+<p>From the steady objects to moving things. When train is moving, cars stop.</p>
+<p><img src="http://farm4.staticflickr.com/3699/13256896873_41df7ff2be_c.jpg" alt="Railroad crossing"></p>
+<p>Of course, there is the never ending blue sky.</p>
+<p><img src="http://farm4.staticflickr.com/3754/13257054424_670eb0fbea_c.jpg" alt="Blue sky"></p>
+<p>Well it does end. After we get past Washington DC, the sun went down. At night, there is really nothing much to see. I was hoping stars, but all were scattered lights from desolated houses.</p>
+<h2>The Mobile Network</h2>
+<p>This is really important. Not just about checking Facebook or Twitter, but making a conference phone call. Unfortunately there is no WiFi service on board. And this is the case with the most of Amtrak trains. We have to rely on mobile network.</p>
+<p>Once we got past Alexander, VA, the cell signal drops considerably, probably because that I was using T-Mobile, and frequently I was on AT&amp;T network.</p>
+<p>Without a good mobile network coverage, I think that this is the most frustrated thing traveling by the train. But if you are a reader, you can open up your Kindle or iBook and start reading. Talking about disconnecting yourself!</p>
+<h2>The Conclusion</h2>
+<p>Getting yourself comfortable is important. Even though the seat is much wider than in the plane, but the hours are longer. On large stations such as Birmingham AL, get a smoke break and take a walk on the station platform to stretch yourself.</p>
+<p>Amtrak is frequently late, and the same happened to us. We finally got to New Orleans more than two hours late.</p>
+<p>This is the road trip without driving. Driving is better, because you are in charge, the landscape will wait for you. But this is much better than flying. Let the scenery come to you, stop and take a picture with your phone and say wow, then let it roll by you.</p>
+<p>Next: <a href="/2014/03/14/traveling-from-the-big-easy-to-the-hollywood-via-amtrak-sunset-limited/">Traveling via Amtrak Sunset Limited</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="blog">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-03T21:39:13.000Z"><a href="/2014/03/03/immediately-invoked-function-expression-in-coffeescript/">Mar 3, 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/03/immediately-invoked-function-expression-in-coffeescript/">Immediately Invoked Function Expression in CoffeeScript</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><a href="http://coffeescript.org/">CoffeeScript</a> only has function expression, there are no named functions nor function declaration, as <a href="http://coffeescript.org/#expressions">almost everything in CoffeeScript is expression</a>.</p>
+<p>Anonymous function can be written as just a dash plus an arrow:</p>
+<figure class="highlight lang-coffeescript"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>-&gt;
+</pre></td></tr></table></figure>
+
+<p>This will be compiled to JavaScript:</p>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>(<span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>});
+</pre></td></tr></table></figure>
+
+<p>This anonymous function can be invoked immediately:</p>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre><span class="comment">// (-&gt;)()</span>
+(<span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>})();
+</pre></td></tr></table></figure>
+
+<p>The immediately invoked function expression (IIFE) syntax is different from the <a href="/2014/03/02/immediately-invoked-function-expression/">preferred format</a> in JavaScript. But this is more likely due to the syntax and compilation of CoffeeScript.</p>
+<p>Here is one useful example to show the syntax:</p>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="comment">// (square = (n) -&gt; return n * n)()</span>
+<span class="keyword">var</span> square;
+
+(square = <span class="keyword">function</span>(n) {
+  <span class="keyword">return</span> n * n;
+})();
+</pre></td></tr></table></figure>
+
+<p>And a few more without compiled Javascript:</p>
+<figure class="highlight lang-coffeescript"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre>(-&gt;)()
+(<span class="function"><span class="title">square</span></span> = (n) -&gt; <span class="keyword">return</span> n * n)()
+console.log (<span class="function"><span class="title">square</span></span> = (n) -&gt; <span class="keyword">return</span> n * n)(<span class="number">10</span>) <span class="comment"># 100</span>
+</pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-02T17:55:23.000Z"><a href="/2014/03/02/immediately-invoked-function-expression/">Mar 2, 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/02/immediately-invoked-function-expression/">Immediately Invoked Function Expression</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>What&#39;s difference between:</p>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre>(<span class="keyword">function</span>(){}());
+(<span class="keyword">function</span>(){})();
+</pre></td></tr></table></figure>
+
+<p>This is function declaration:</p>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span>{</span>}
+</pre></td></tr></table></figure>
+
+<p>The identifier of the function declaration is required.</p>
+<p>This is function expression:</p>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="keyword">var</span> foo = <span class="keyword">function</span>(){};
+</pre></td></tr></table></figure>
+
+<p>The right hand side of the assignment must be an expression. And function identifier is optional. Check the previous article about the difference between <a href="/2014/03/01/function-declaration-and-function-expression/">function declaration and function expression</a>.</p>
+<p>Now, come in the grouping operator, which return the result of evaluating an expression:</p>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>(<span class="keyword">function</span>(){});
+</pre></td></tr></table></figure>
+
+<p>If we do it with named function:</p>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span>{</span>}
+(foo);
+</pre></td></tr></table></figure>
+
+<p>or</p>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>(<span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span>{</span>});
+</pre></td></tr></table></figure>
+
+<p>But we haven‘t done anything here, in another word, we haven’t invoked the function. We merely evaluate the function in three occasions. Function is object in JavaScript, when you&#39;re evaluating an object, the result is still an object:</p>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre>console.log(<span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span>{</span>}); <span class="comment">// [Function: foo]</span>
+console.log(<span class="function"><span class="keyword">function</span> <span class="params">()</span>{</span>});    <span class="comment">// [Function]</span>
+<span class="function"><span class="keyword">function</span> <span class="title">bar</span><span class="params">()</span>{</span>}
+console.log(bar);              <span class="comment">// [Function: bar]</span>
+console.log({});               <span class="comment">// {}</span>
+</pre></td></tr></table></figure>
+
+<p>Now, let&#39;s apply function invocation, and do it the traditional way:</p>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>foo();
+</pre></td></tr></table></figure>
+
+<p>The function has been invoked, and it will return the result of the function.</p>
+<p>Replace the identifier with function declaration:</p>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span>{</span>}();
+</pre></td></tr></table></figure>
+
+<p>However, this does not work. Because interpreter treats it as a function declaration, and <code>(</code> will become an unexpected token. Function declaration cannot be invoked immediately. So, we need to make it an expression, by using the grouping operator:</p>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>(<span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span>{</span>})();
+</pre></td></tr></table></figure>
+
+<p>The function identifier is no longer necessary:</p>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>(<span class="keyword">function</span>(){})();
+</pre></td></tr></table></figure>
+
+<p>Since grouping operator return the result of the expression, we can just drop it:</p>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="keyword">function</span>(){}();
+</pre></td></tr></table></figure>
+
+<p>But this statement becomes a function declaration again, so we need to place the grouping operator around it:</p>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>(<span class="keyword">function</span>(){}());
+</pre></td></tr></table></figure>
+
+<p>Okay, but what&#39;s difference between:</p>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre>(<span class="keyword">function</span>(){}());
+(<span class="keyword">function</span>(){})();
+</pre></td></tr></table></figure>
+
+<p>There is no difference, they are both function expressions being invoked immediately.  Function invocation can only be done via function expression. But first one is more align with <code>foo()</code>, the traditional way. According to the <a href="http://javascript.crockford.com/code.html">Code Convention for JavaScript Programming Language</a> by Douglas Crockford:</p>
+<blockquote>
+<p>When a function is to be invoked immediately, the entire <em>invocation expression</em> should be wrapped in parens so that it is clear that the value being produced is the result of the function and not the function itself.</p>
+</blockquote>
+<p>The invocation expression is <code>function(){}()</code>, and wrap it around parenthesis becomes <code>(function(){}());</code>.</p>
+<p>Therefore, this first method is more traditional and preferred.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-01T08:04:36.000Z"><a href="/2014/03/01/function-declaration-and-function-expression/">Mar 1, 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/01/function-declaration-and-function-expression/">Function Declaration and Function Expression</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>In JavaScript, what is <em>function declaration</em>?</p>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">square</span><span class="params">(n)</span> { <span class="title">return</span> <span class="title">n</span> * <span class="title">n</span>; }</span></code></pre>
+<p>Here we declare a function and name it “square”. But what is <em>function expression</em>?</p>
+<pre><code>var square = <span class="function"><span class="keyword">function</span> <span class="params">(n)</span> { <span class="title">return</span> <span class="title">n</span> * <span class="title">n</span>; };</span></code></pre>
+<p>When you start a statement with keyword <code>function</code>, then the statement is <em>function declaration</em>, everything else is <em>function expression</em>.</p>
+<p>Function expression can either be named or anonymous. The above is anonymous function, and here is a named one:</p>
+<pre><code>var square = <span class="function"><span class="keyword">function</span> <span class="title">square</span><span class="params">(n)</span> { <span class="title">return</span> <span class="title">n</span> * <span class="title">n</span>; };</span></code></pre>
+<p>There is a variable <code>square</code> and function name <code>square</code>, but they are not the same. The scopes are different. The function name <code>square</code> of the function expression can be only used inside the function, mainly for debugging purpose. Accessing from outside the function, will throw <code>ReferenceError</code>:</p>
+<pre><code><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span> <span class="title">bar</span><span class="params">()</span> {</span>};
+bar(); <span class="comment">// ReferenceError: bar is not defined</span></code></pre>
+<p>We can also use property ‘name’ to differentiate a named vs. an anonymous function:</p>
+<pre><code>console.<span class="command">log</span>(square.<span class="property">name</span>); // empty <span class="type">string</span> <span class="keyword">for</span> an anonymous function</code></pre>
+<p>However, you cannot create an anonymous function declaration, for a very obvious reason:</p>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="params">(n)</span> { <span class="title">return</span> <span class="title">n</span> * <span class="title">n</span>; } // <span class="title">SyntaxError</span>: <span class="title">Unexpected</span> <span class="title">token</span> <span class="params">(</code></pre>
+<p>Another difference between function declaration and function expression is hoisting:</p>
+<pre><code>square(<span class="number">10</span>); <span class="comment">// 100</span>
+<span class="function"><span class="keyword">function</span> <span class="title">square</span><span class="params">(n)</span> {</span> <span class="keyword">return</span> n * n; }</code></pre>
+<p>Function defined by declaration is hoisted, but not for function expression:</p>
+<pre><code>square(<span class="number">10</span>); // TypeError: undefined is <span class="keyword">not</span> a <span class="function"><span class="keyword">function</span>
+<span class="title">var</span> <span class="title">square</span> = <span class="title">function</span> <span class="params">(n)</span></span> { <span class="keyword">return</span> n * n; }</code></pre>
+<p>The variable declaration is hoisted, but not for the definition. Therefore, result in <code>TypeError</code>. However, for best practice, functions should be defined before being used.</p>
+<p>In conclusion:</p>
+<ul>
+<li>Function declaration must start with keyword <code>function</code> in the beginning of the statement. Everything else is function expression.</li>
+<li>Function expression can be anonymous and named, but function declaration can only be named.</li>
+<li>Function declaration is hoisted, but not function expression.</li>
+</ul>
+<p>This function declaration happens inside a unreachable block.</p>
+<pre><code>square(<span class="number">10</span>); <span class="comment">// 100</span>
+<span class="keyword">if</span> (<span class="literal">false</span>) {
+  <span class="function"><span class="keyword">function</span> <span class="title">square</span><span class="params">(n)</span> {</span> <span class="keyword">return</span> n * n; }
+}</code></pre>
+<p>There is no block scope in JavaScript. Spaces in the beginning of keyword <code>function</code> do not count. This is still a valid function declaration.</p>
+<p>A simple way to turn function declaration into function expression is by wrapping around parentheses:</p>
+<pre><code><span class="list">(<span class="title">function</span><span class="body"> square<span class="list">(<span class="title">n</span><span class="body">)</span></span> { return n <span class="variable">* n; });</code></pre>
+<p>We are applying the grouping operator <code>()</code> here, which evaluates the function expression.</p>
+<p>Another way:</p>
+<pre><code><span class="function"><span class="title">foo</span><span class="params">(err, <span class="keyword">fun</span><span class="function_name">ction</span>()<span class="tuple">{}</span>);</code></pre>
+<p>Just think about <code>,</code> as <code>()</code>.</p>
+<p>Other good reads:</p>
+<ul>
+<li>StackOverflow, <a href="http://stackoverflow.com/q/336859/594696">var functionName = function() {} vs function functionName() {}</a></li>
+<li>Angus Croll, <a href="http://javascriptweblog.wordpress.com/2010/07/06/function-declarations-vs-function-expressions/">Function Declarations vs. Function Expressions</a></li>
+<li>MDN, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope#Function_constructor_vs._function_declaration_vs._function_expression">Function constructor vs. function declaration vs. function expression</a></li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+
+  <nav id="pagination">
+  
+  
+  <div class="clearfix"></div>
+</nav>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:realguess.net">
+  </form>
+</div>
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/2013/">2013</a><small>1</small></li>
+  
+    <li><a href="/tags/absolute-path/">absolute-path</a><small>1</small></li>
+  
+    <li><a href="/tags/amazon/">amazon</a><small>1</small></li>
+  
+    <li><a href="/tags/amtrak/">amtrak</a><small>1</small></li>
+  
+    <li><a href="/tags/android/">android</a><small>1</small></li>
+  
+    <li><a href="/tags/android-4.3/">android-4.3</a><small>1</small></li>
+  
+    <li><a href="/tags/anonymous-function/">anonymous-function</a><small>1</small></li>
+  
+    <li><a href="/tags/array/">array</a><small>2</small></li>
+  
+    <li><a href="/tags/automatic-link/">automatic-link</a><small>1</small></li>
+  
+    <li><a href="/tags/awk/">awk</a><small>1</small></li>
+  
+    <li><a href="/tags/aws/">aws</a><small>2</small></li>
+  
+    <li><a href="/tags/aws-cli/">aws-cli</a><small>1</small></li>
+  
+    <li><a href="/tags/best-practice/">best-practice</a><small>1</small></li>
+  
+    <li><a href="/tags/big-apple/">big-apple</a><small>1</small></li>
+  
+    <li><a href="/tags/big-easy/">big-easy</a><small>1</small></li>
+  
+    <li><a href="/tags/big-number/">big-number</a><small>1</small></li>
+  
+    <li><a href="/tags/browser/">browser</a><small>1</small></li>
+  
+    <li><a href="/tags/cat/">cat</a><small>1</small></li>
+  
+    <li><a href="/tags/chat/">chat</a><small>1</small></li>
+  
+    <li><a href="/tags/chrome/">chrome</a><small>1</small></li>
+  
+    <li><a href="/tags/cli/">cli</a><small>1</small></li>
+  
+    <li><a href="/tags/cloud-storage/">cloud-storage</a><small>1</small></li>
+  
+    <li><a href="/tags/cocoon/">cocoon</a><small>1</small></li>
+  
+    <li><a href="/tags/coding-style/">coding-style</a><small>1</small></li>
+  
+    <li><a href="/tags/coffeelint/">coffeelint</a><small>1</small></li>
+  
+    <li><a href="/tags/coffeescript/">coffeescript</a><small>7</small></li>
+  
+    <li><a href="/tags/command-history/">command-history</a><small>1</small></li>
+  
+    <li><a href="/tags/command-line/">command-line</a><small>1</small></li>
+  
+    <li><a href="/tags/command-line-interface/">command-line-interface</a><small>1</small></li>
+  
+    <li><a href="/tags/configuration/">configuration</a><small>1</small></li>
+  
+    <li><a href="/tags/crescent/">crescent</a><small>1</small></li>
+  
+    <li><a href="/tags/cron/">cron</a><small>2</small></li>
+  
+    <li><a href="/tags/crontab/">crontab</a><small>1</small></li>
+  
+    <li><a href="/tags/cryptography/">cryptography</a><small>1</small></li>
+  
+    <li><a href="/tags/custom-domain/">custom-domain</a><small>1</small></li>
+  
+    <li><a href="/tags/custom-generator/">custom-generator</a><small>1</small></li>
+  
+    <li><a href="/tags/cwd/">cwd</a><small>1</small></li>
+  
+    <li><a href="/tags/datagram/">datagram</a><small>1</small></li>
+  
+    <li><a href="/tags/date/">date</a><small>1</small></li>
+  
+    <li><a href="/tags/diff/">diff</a><small>1</small></li>
+  
+    <li><a href="/tags/distributed-team/">distributed-team</a><small>1</small></li>
+  
+    <li><a href="/tags/docco/">docco</a><small>1</small></li>
+  
+    <li><a href="/tags/echo/">echo</a><small>1</small></li>
+  
+    <li><a href="/tags/ecmascript-harmony/">ecmascript-harmony</a><small>1</small></li>
+  
+    <li><a href="/tags/encryption/">encryption</a><small>1</small></li>
+  
+    <li><a href="/tags/environment/">environment</a><small>2</small></li>
+  
+    <li><a href="/tags/environment-variable/">environment-variable</a><small>1</small></li>
+  
+    <li><a href="/tags/express/">express</a><small>1</small></li>
+  
+    <li><a href="/tags/file-system/">file-system</a><small>1</small></li>
+  
+    <li><a href="/tags/filename/">filename</a><small>1</small></li>
+  
+    <li><a href="/tags/fs/">fs</a><small>1</small></li>
+  
+    <li><a href="/tags/function/">function</a><small>3</small></li>
+  
+    <li><a href="/tags/function-declaration/">function-declaration</a><small>2</small></li>
+  
+    <li><a href="/tags/function-expression/">function-expression</a><small>3</small></li>
+  
+    <li><a href="/tags/function-innovation/">function-innovation</a><small>1</small></li>
+  
+    <li><a href="/tags/generator/">generator</a><small>1</small></li>
+  
+    <li><a href="/tags/get/">get</a><small>1</small></li>
+  
+    <li><a href="/tags/ghost/">ghost</a><small>1</small></li>
+  
+    <li><a href="/tags/github/">github</a><small>1</small></li>
+  
+    <li><a href="/tags/goal/">goal</a><small>1</small></li>
+  
+    <li><a href="/tags/google-keep/">google-keep</a><small>1</small></li>
+  
+    <li><a href="/tags/grunt/">grunt</a><small>1</small></li>
+  
+    <li><a href="/tags/grunt-contrib-jshint/">grunt-contrib-jshint</a><small>1</small></li>
+  
+    <li><a href="/tags/grunt-contrib-watch/">grunt-contrib-watch</a><small>1</small></li>
+  
+    <li><a href="/tags/guard/">guard</a><small>1</small></li>
+  
+    <li><a href="/tags/head/">head</a><small>2</small></li>
+  
+    <li><a href="/tags/hipchat/">hipchat</a><small>1</small></li>
+  
+    <li><a href="/tags/hong-kong/">hong-kong</a><small>1</small></li>
+  
+    <li><a href="/tags/hosted-zone/">hosted-zone</a><small>1</small></li>
+  
+    <li><a href="/tags/http/">http</a><small>1</small></li>
+  
+    <li><a href="/tags/id/">id</a><small>1</small></li>
+  
+    <li><a href="/tags/iife/">iife</a><small>2</small></li>
+  
+    <li><a href="/tags/immediately-invoked-function-expression/">immediately-invoked-function-expression</a><small>2</small></li>
+  
+    <li><a href="/tags/interpreter/">interpreter</a><small>1</small></li>
+  
+    <li><a href="/tags/javascript/">javascript</a><small>8</small></li>
+  
+    <li><a href="/tags/jelly-bean/">jelly-bean</a><small>1</small></li>
+  
+    <li><a href="/tags/join/">join</a><small>1</small></li>
+  
+    <li><a href="/tags/jshint/">jshint</a><small>1</small></li>
+  
+    <li><a href="/tags/json/">json</a><small>1</small></li>
+  
+    <li><a href="/tags/koa/">koa</a><small>1</small></li>
+  
+    <li><a href="/tags/line-divider/">line-divider</a><small>1</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>3</small></li>
+  
+    <li><a href="/tags/livereload/">livereload</a><small>1</small></li>
+  
+    <li><a href="/tags/markdown/">markdown</a><small>2</small></li>
+  
+    <li><a href="/tags/mi3/">mi3</a><small>1</small></li>
+  
+    <li><a href="/tags/mongodb/">mongodb</a><small>1</small></li>
+  
+    <li><a href="/tags/mongoexport/">mongoexport</a><small>1</small></li>
+  
+    <li><a href="/tags/multi-parts/">multi-parts</a><small>1</small></li>
+  
+    <li><a href="/tags/named-function/">named-function</a><small>1</small></li>
+  
+    <li><a href="/tags/nb/">nb</a><small>1</small></li>
+  
+    <li><a href="/tags/network/">network</a><small>1</small></li>
+  
+    <li><a href="/tags/new-orleans/">new-orleans</a><small>1</small></li>
+  
+    <li><a href="/tags/new-york/">new-york</a><small>1</small></li>
+  
+    <li><a href="/tags/node/">node</a><small>8</small></li>
+  
+    <li><a href="/tags/nodemon/">nodemon</a><small>1</small></li>
+  
+    <li><a href="/tags/normalization/">normalization</a><small>1</small></li>
+  
+    <li><a href="/tags/nota-bene/">nota-bene</a><small>1</small></li>
+  
+    <li><a href="/tags/note-well/">note-well</a><small>1</small></li>
+  
+    <li><a href="/tags/npm/">npm</a><small>1</small></li>
+  
+    <li><a href="/tags/npm-module/">npm-module</a><small>1</small></li>
+  
+    <li><a href="/tags/null/">null</a><small>1</small></li>
+  
+    <li><a href="/tags/object/">object</a><small>1</small></li>
+  
+    <li><a href="/tags/parseint/">parseint</a><small>1</small></li>
+  
+    <li><a href="/tags/path/">path</a><small>3</small></li>
+  
+    <li><a href="/tags/ping/">ping</a><small>1</small></li>
+  
+    <li><a href="/tags/preinstall/">preinstall</a><small>1</small></li>
+  
+    <li><a href="/tags/process/">process</a><small>1</small></li>
+  
+    <li><a href="/tags/proxy/">proxy</a><small>1</small></li>
+  
+    <li><a href="/tags/query-parameter/">query-parameter</a><small>1</small></li>
+  
+    <li><a href="/tags/record-set/">record-set</a><small>1</small></li>
+  
+    <li><a href="/tags/relative-path/">relative-path</a><small>1</small></li>
+  
+    <li><a href="/tags/remote-working/">remote-working</a><small>1</small></li>
+  
+    <li><a href="/tags/repl/">repl</a><small>1</small></li>
+  
+    <li><a href="/tags/require/">require</a><small>1</small></li>
+  
+    <li><a href="/tags/rlwrap/">rlwrap</a><small>1</small></li>
+  
+    <li><a href="/tags/route-53/">route-53</a><small>1</small></li>
+  
+    <li><a href="/tags/scaffolding/">scaffolding</a><small>1</small></li>
+  
+    <li><a href="/tags/script/">script</a><small>1</small></li>
+  
+    <li><a href="/tags/settings/">settings</a><small>1</small></li>
+  
+    <li><a href="/tags/shabang/">shabang</a><small>1</small></li>
+  
+    <li><a href="/tags/sharing/">sharing</a><small>1</small></li>
+  
+    <li><a href="/tags/shebang/">shebang</a><small>1</small></li>
+  
+    <li><a href="/tags/shell/">shell</a><small>1</small></li>
+  
+    <li><a href="/tags/shell-script/">shell-script</a><small>1</small></li>
+  
+    <li><a href="/tags/source-maps/">source-maps</a><small>1</small></li>
+  
+    <li><a href="/tags/split/">split</a><small>1</small></li>
+  
+    <li><a href="/tags/sshuttle/">sshuttle</a><small>1</small></li>
+  
+    <li><a href="/tags/startup/">startup</a><small>1</small></li>
+  
+    <li><a href="/tags/stats/">stats</a><small>1</small></li>
+  
+    <li><a href="/tags/success/">success</a><small>1</small></li>
+  
+    <li><a href="/tags/sync/">sync</a><small>1</small></li>
+  
+    <li><a href="/tags/time-zone/">time-zone</a><small>1</small></li>
+  
+    <li><a href="/tags/todo/">todo</a><small>1</small></li>
+  
+    <li><a href="/tags/train/">train</a><small>1</small></li>
+  
+    <li><a href="/tags/travel/">travel</a><small>1</small></li>
+  
+    <li><a href="/tags/tumblr/">tumblr</a><small>1</small></li>
+  
+    <li><a href="/tags/twitter/">twitter</a><small>1</small></li>
+  
+    <li><a href="/tags/ubuntu/">ubuntu</a><small>1</small></li>
+  
+    <li><a href="/tags/uglifyjs/">uglifyjs</a><small>1</small></li>
+  
+    <li><a href="/tags/underscore/">underscore</a><small>1</small></li>
+  
+    <li><a href="/tags/unix/">unix</a><small>1</small></li>
+  
+    <li><a href="/tags/username/">username</a><small>1</small></li>
+  
+    <li><a href="/tags/vim/">vim</a><small>2</small></li>
+  
+    <li><a href="/tags/vimdiff/">vimdiff</a><small>1</small></li>
+  
+    <li><a href="/tags/vpn/">vpn</a><small>1</small></li>
+  
+    <li><a href="/tags/web-framework/">web-framework</a><small>1</small></li>
+  
+    <li><a href="/tags/xiaomi/">xiaomi</a><small>1</small></li>
+  
+    <li><a href="/tags/yeoman/">yeoman</a><small>1</small></li>
+  
+    <li><a href="/tags/yield/">yield</a><small>1</small></li>
+  
+    <li><a href="/tags/小米/">小米</a><small>1</small></li>
+  
+    <li><a href="/tags/小米手机/">小米手机</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Chao Huang
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

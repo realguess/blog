@@ -1,0 +1,663 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>yield | realguess</title>
+  <meta name="author" content="Chao Huang">
+  
+  <meta name="description" content="Just a blog about every detail encountered.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="realguess"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="realguess" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-45698182-1', 'realguess.net');
+  ga('send', 'pageview');
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">realguess</a></h1>
+  <h2><a href="/">Don't afraid to try!</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title tag">yield</h2>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-01-17T22:13:03.000Z"><a href="/2014/01/17/a-new-nodejs-web-framework-koa/">Jan 17, 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/01/17/a-new-nodejs-web-framework-koa/">A New NodeJS Web Framework - Koa</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Taking the first spin on <a href="http://koajs.com/">Koa</a>, a new web framework designed by the team behind <a href="http://expressjs.com/">Express</a>.</p>
+<h2>Requirements</h2>
+<ol>
+<li>Node v0.11.9 or higher is required for generator support.</li>
+<li><code>--harmony</code> flag must be used when running Node.</li>
+</ol>
+<p>Without the <code>--harmony</code> flag, genertor function cannot be defined:</p>
+<pre><code><span class="function"><span class="keyword">function</span> *<span class="title">fn</span><span class="params">()</span> {</span>
+           ^
+SyntaxError: Unexpected token *
+    at <span class="transposed_variable">exports.</span>runInThisContext (<span class="transposed_variable">vm.</span>js:<span class="number">69</span>:<span class="number">16</span>)
+    at <span class="transposed_variable">Module.</span>_compile (<span class="transposed_variable">module.</span>js:<span class="number">432</span>:<span class="number">25</span>)
+    at <span class="transposed_variable">Object.</span><span class="transposed_variable">Module.</span><span class="transposed_variable">_extensions..</span>js (<span class="transposed_variable">module.</span>js:<span class="number">467</span>:<span class="number">10</span>)
+    at <span class="transposed_variable">Module.</span>load (<span class="transposed_variable">module.</span>js:<span class="number">349</span>:<span class="number">32</span>)
+    at <span class="transposed_variable">Function.</span><span class="transposed_variable">Module.</span>_load (<span class="transposed_variable">module.</span>js:<span class="number">305</span>:<span class="number">12</span>)
+    at <span class="transposed_variable">Function.</span><span class="transposed_variable">Module.</span>runMain (<span class="transposed_variable">module.</span>js:<span class="number">490</span>:<span class="number">10</span>)
+    at startup (<span class="transposed_variable">node.</span>js:<span class="number">123</span>:<span class="number">16</span>)
+    at <span class="transposed_variable">node.</span>js:<span class="number">1031</span>:<span class="number">3</span></code></pre>
+<p>So, set the <code>--harmony</code> flag in shell alias:</p>
+<pre><code>$ <span class="keyword">alias</span> node=<span class="attribute">'node</span> <span class="comment">--harmony'</span></code></pre>
+<p>To know more:</p>
+<pre><code>$ man node
+--harmony (enable all harmony features (except <span class="keyword">typeof</span>))
+      type: <span class="keyword">bool</span>  <span class="keyword">default</span>: <span class="keyword">false</span></code></pre>
+<p><em>Harmony</em> is the codename of ECMAScript 6, the next version of the standard.</p>
+<h2>Install</h2>
+<pre><code><span class="variable">$ </span>npm install koa</code></pre>
+<p>The footprint of the framework is small. Therefore, there is no executable binary like Express, and we do not need to install it globally.</p>
+<h2>Dependencies</h2>
+<p>Dependencies on version 0.2.1:</p>
+<pre><code><span class="string">"dependencies"</span>: {
+  <span class="string">"accepts"</span>: <span class="string">"~1.0.0"</span>,
+  <span class="string">"type-is"</span>: <span class="string">"~1.0.0"</span>,
+  <span class="string">"on-socket-error"</span>: <span class="string">"~1.0.1"</span>,
+  <span class="string">"co"</span>: <span class="string">"~3.0.1"</span>,
+  <span class="string">"debug"</span>: <span class="string">"<span class="variable">*"</span>,
+  "</span>mime<span class="string">": "</span>~<span class="number">1.2</span>.<span class="number">11</span><span class="string">",
+  "</span>fresh<span class="string">": "</span>~<span class="number">0</span>.<span class="number">2.0</span><span class="string">",
+  "</span>koa-compose<span class="string">": "</span>~<span class="number">2.1</span>.<span class="number">0</span><span class="string">",
+  "</span>cookies<span class="string">": "</span>~<span class="number">0</span>.<span class="number">3.7</span><span class="string">",
+  "</span>keygrip<span class="string">": "</span>~<span class="number">1.0</span>.<span class="number">0</span><span class="string">"
+}</code></pre>
+<h2>Middleware</h2>
+<p>Middleware system is the core of either Express or Koa based application. This needs a separate post. Here just describes the difference in design.</p>
+<p>In a simple assembly design, each unit passes control to the next one until the last one terminates and responses to the request:</p>
+<pre><code>    <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+<span class="literal">-</span><span class="literal">-</span>&gt; <span class="comment">|</span>     <span class="comment">|</span> <span class="literal">-</span><span class="literal">-</span>&gt; <span class="comment">|</span>     <span class="comment">|</span> <span class="literal">-</span><span class="literal">-</span>&gt; <span class="comment">|</span>     <span class="comment">|</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">o</span>
+    <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span></code></pre>
+<p>Express middleware passes control to the next one like an assembly line, but each unit is capable of responding to the request:</p>
+<pre><code>       <span class="comment">o</span>           <span class="comment">o</span>           <span class="comment">o</span>
+       <span class="comment">|</span>           <span class="comment">|</span>           <span class="comment">|</span>
+    <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+<span class="literal">-</span><span class="literal">-</span>&gt; <span class="comment">|</span>     <span class="comment">|</span> <span class="literal">-</span><span class="literal">-</span>&gt; <span class="comment">|</span>     <span class="comment">|</span> <span class="literal">-</span><span class="literal">-</span>&gt; <span class="comment">|</span>     <span class="comment">|</span>
+    <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span></code></pre>
+<p>Koa provides a traceback via generator, each unit is capable of working on the request twice instead of once as previous two designs. It is stack alike, where the first generator will also be the last one prior to responding to request:</p>
+<pre><code>       <span class="comment">o</span>
+       <span class="comment">|</span>
+    <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+<span class="literal">-</span><span class="literal">-</span>&gt; <span class="comment">|</span>     <span class="comment">|</span> <span class="literal">-</span><span class="literal">-</span>&gt; <span class="comment">|</span>     <span class="comment">|</span> <span class="literal">-</span><span class="literal">-</span>&gt; <span class="comment">|</span>     <span class="comment">|</span>
+    <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>     <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span>
+       <span class="comment">^</span>          <span class="comment">|</span> <span class="comment">^</span>         <span class="comment">|</span>
+       <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span> <span class="literal">+</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">+</span></code></pre>
+<p>This is sort of an assembly loop, where the starting station is also be the ending station.</p>
+<h2>Usage</h2>
+<p>Here is one liner:</p>
+<pre><code>require(<span class="string">'koa'</span>)().use(<span class="function"><span class="keyword">function</span> *<span class="params">()</span> { <span class="title">this</span>.<span class="title">body</span> = '<span class="title">OK</span>'; }).<span class="title">listen</span><span class="params">(3000)</span>;</span></code></pre>
+<p><code>app.use</code> requires a generator function or <code>function *()</code>. Koa middleware uses <code>this</code> (context) instead of <code>req</code> and <code>res</code> in Express. It also encapsulates Node&#39;s <code>request</code> and <code>response</code> objects. For example, <code>this</code> or context has the following properties:</p>
+<pre><code>[ &#39;request&#39;,     // Koa request
+  &#39;response&#39;,    // Koa response
+  &#39;app&#39;,
+  &#39;req&#39;,         // Node request
+  &#39;res&#39;,         // Node response
+  &#39;onerror&#39;,
+  &#39;originalUrl&#39;,
+  &#39;cookies&#39;,
+  &#39;accept&#39; ]</code></pre>
+<h3>Status and Body</h3>
+<p>Status can be used as a flag indicating whether a request has been processed or not:</p>
+<pre><code>app.<span class="keyword">use</span>(<span class="function"><span class="keyword">function</span> *<span class="params">()</span> {</span>
+  console.log(<span class="keyword">this</span>.status); <span class="comment">// undefined</span>
+  <span class="keyword">this</span>.body = <span class="string">'processed'</span>;
+  console.log(<span class="keyword">this</span>.status); <span class="comment">// 200</span>
+});</code></pre>
+<p>When the <code>body</code> is populated, <code>status</code> is automatically updated, probably via the <code>nextTick</code> method. So, we can use it as the flag to design a response such as a custom not found response.</p>
+<h3>Not Found</h3>
+<p>Create a custom <code>Not Found</code> in JSON content type:</p>
+<pre><code>app.<span class="keyword">use</span>(<span class="function"><span class="keyword">function</span> *<span class="params">(next)</span> {</span>
+  yield next; <span class="comment">// The operation is yet to start.</span>
+  <span class="keyword">if</span> (<span class="keyword">this</span>.status) { <span class="keyword">return</span>; }
+
+  <span class="keyword">this</span>.status = <span class="number">404</span>;
+  <span class="keyword">this</span>.body = { message: <span class="string">'Cannot find what you are looking for :('</span> };
+});
+app.<span class="keyword">use</span>(<span class="function"><span class="keyword">function</span> *<span class="params">()</span> {</span>}); <span class="comment">// Do nothing to simulate not found.</span></code></pre>
+<h3>Error Handling</h3>
+<p>Koa app is capable of catching the error event:</p>
+<pre><code>app.on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(err, ctx)</span> {</span>
+  <span class="comment">// Log errors.</span>
+});</code></pre>
+<p>where <code>ctx</code> is a context instance. But you cannot modify the response body. This is more for server side logging and debugging purpose. The <code>500 Internal Server Error</code> will be returned to the client.</p>
+<p>We can use <code>try..catch</code> to define a custom error handling middleware:</p>
+<pre><code>app.use(<span class="function"><span class="keyword">function</span> *<span class="params">(next)</span> {</span>
+  <span class="keyword">try</span> {
+    <span class="keyword">yield</span> next;
+  } <span class="keyword">catch</span> (err) {
+    <span class="keyword">this</span>.status = err.status || <span class="number">500</span>;
+    <span class="keyword">this</span>.body   = { message: err.message || <span class="string">'Bad stuff happened!'</span> };
+    <span class="keyword">this</span>.app.emit(<span class="string">'error'</span>, err, <span class="keyword">this</span>); <span class="comment">// Enable error event handling</span>
+  }
+});</code></pre>
+<p>Make sure to emit the error event and let the server log the error.</p>
+<p>All non-operational middleware (e.g., not found or error) should be defined first, so it can be traced back as the last guards before sending response back.</p>
+<h3>Routing</h3>
+<p>Out of the box, Koa does not support routing, but it can be achieved via routing middleware, see <a href="https://github.com/koajs/koa/wiki">examples</a>.</p>
+<h2>Examples</h2>
+<p>Define an app with only one middleware generator function:</p>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="function"><span class="keyword">function</span> *<span class="title">foo</span><span class="params">(next)</span> {</span>
+  console.log(<span class="string">'foo'</span>);
+  <span class="keyword">this</span>.status = <span class="number">204</span>;
+}
+require(<span class="string">'koa'</span>)().use(foo).listen(<span class="number">3000</span>);
+</pre></td></tr></table></figure>
+
+<p>Instead of using status code <code>200</code>, we use <code>204</code> here, because the response contains no body. If using <code>200</code>, the server does not know the total content length, will result in <code>Transfer-Encoding: chunked</code> header instead of <code>Content-Length</code>. See <a href="http://en.wikipedia.org/wiki/Chunked_transfer_encoding">chunked transfer encoding</a>.</p>
+<p>This app simply prints out <code>foo</code> on the server side, and respond to a client with status code <code>204</code> and an empty body. We can even omit the <code>next</code> parameter, since we are not using it.</p>
+<p>Now let&#39;s use two middleware generator functions:</p>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre><span class="comment">// Response: foo</span>
+<span class="function"><span class="keyword">function</span> *<span class="title">foo</span><span class="params">(next)</span> {</span>
+  <span class="keyword">this</span>.body = <span class="string">'foo'</span>;
+}
+<span class="function"><span class="keyword">function</span> *<span class="title">bar</span><span class="params">(next)</span> {</span>
+  <span class="keyword">this</span>.body = <span class="string">'bar'</span>;
+}
+require(<span class="string">'koa'</span>)().use(foo).use(bar).listen(<span class="number">3000</span>);
+</pre></td></tr></table></figure>
+
+<p>Since generator <code>foo</code> sets the body, generator <code>bar</code> will never be reached. We can change that by adding the <code>yield</code>: </p>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="code"><pre><span class="comment">// Response: bar</span>
+<span class="function"><span class="keyword">function</span> *<span class="title">foo</span><span class="params">(next)</span> {</span>
+  <span class="keyword">this</span>.body = <span class="string">'foo'</span>;
+  <span class="keyword">yield</span> next;
+}
+<span class="function"><span class="keyword">function</span> *<span class="title">bar</span><span class="params">(next)</span> {</span>
+  <span class="keyword">this</span>.body = <span class="string">'bar'</span>;
+  <span class="keyword">yield</span> next;
+}
+require(<span class="string">'koa'</span>)().use(foo).use(bar).listen(<span class="number">3000</span>);
+</pre></td></tr></table></figure>
+
+<p>This looks alot like Express, <code>yeild next</code> is similar to <code>next()</code>. Request travels through the middleware system first via <code>foo</code> then <code>bar</code>. But actually by using generator, it also returns back to <code>foo</code> as <code>foo-&gt;bar-&gt;foo</code>:</p>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre><span class="comment">// Response: foo again</span>
+<span class="function"><span class="keyword">function</span> *<span class="title">foo</span><span class="params">(next)</span> {</span>
+  <span class="keyword">this</span>.body = <span class="string">'foo'</span>;
+  <span class="keyword">yield</span> next;
+  <span class="keyword">this</span>.body = <span class="string">'foo again'</span>;
+}
+<span class="function"><span class="keyword">function</span> *<span class="title">bar</span><span class="params">(next)</span> {</span>
+  <span class="keyword">this</span>.body = <span class="string">'bar'</span>;
+  <span class="keyword">yield</span> next;
+}
+require(<span class="string">'koa'</span>)().use(foo).use(bar).listen(<span class="number">3000</span>);
+</pre></td></tr></table></figure>
+
+<p>This is similar to a stack alike request model, where the first middleware should also be the last middleware to touch the request. There is a no-op middleware in the end to catch the last <code>yield next</code> produced by <code>bar</code> middleware generator and traces back the stack.</p>
+<h2>Debugging</h2>
+<p>Set environment variable <code>DEBUG=koa*</code> to enable Koa specific debugging information in development environment:</p>
+<pre><code><span class="variable">$ </span><span class="constant">DEBUG</span>=koa* node app.js</code></pre>
+<p>You will see a list of middleware. If a middleware is an anonymous function, we can set <code>._name</code> to define a custom name:</p>
+<pre><code><span class="function"><span class="keyword">function</span> *<span class="title">foo</span><span class="params">(next)</span> <span class="comment">{
+  // Middleware definition starts here.
+}</span>
+<span class="title">foo</span>._<span class="title">name</span> = '<span class="title">bar</span>';</span>
+app.use(foo);</code></pre>
+<p>The middleware name will be <code>bar</code> instead of <code>foo</code>.</p>
+<h2>Resources</h2>
+<ol>
+<li><a href="http://koajs.com/">Koa</a></li>
+<li><a href="https://github.com/koajs/koa">Koa | GitHub</a></li>
+<li><a href="https://github.com/koajs/koa/blob/master/docs/guide.md">Koa Quick Guide</a></li>
+<li><a href="https://github.com/koajs/koa/wiki">Koa Middleware List</a></li>
+</ol>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+
+  <nav id="pagination">
+  
+  
+  <div class="clearfix"></div>
+</nav>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:realguess.net">
+  </form>
+</div>
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/2013/">2013</a><small>1</small></li>
+  
+    <li><a href="/tags/absolute-path/">absolute-path</a><small>1</small></li>
+  
+    <li><a href="/tags/amazon/">amazon</a><small>1</small></li>
+  
+    <li><a href="/tags/amtrak/">amtrak</a><small>1</small></li>
+  
+    <li><a href="/tags/android/">android</a><small>1</small></li>
+  
+    <li><a href="/tags/android-4.3/">android-4.3</a><small>1</small></li>
+  
+    <li><a href="/tags/anonymous-function/">anonymous-function</a><small>1</small></li>
+  
+    <li><a href="/tags/array/">array</a><small>2</small></li>
+  
+    <li><a href="/tags/automatic-link/">automatic-link</a><small>1</small></li>
+  
+    <li><a href="/tags/awk/">awk</a><small>1</small></li>
+  
+    <li><a href="/tags/aws/">aws</a><small>2</small></li>
+  
+    <li><a href="/tags/aws-cli/">aws-cli</a><small>1</small></li>
+  
+    <li><a href="/tags/best-practice/">best-practice</a><small>1</small></li>
+  
+    <li><a href="/tags/big-apple/">big-apple</a><small>1</small></li>
+  
+    <li><a href="/tags/big-easy/">big-easy</a><small>1</small></li>
+  
+    <li><a href="/tags/big-number/">big-number</a><small>1</small></li>
+  
+    <li><a href="/tags/browser/">browser</a><small>1</small></li>
+  
+    <li><a href="/tags/cat/">cat</a><small>1</small></li>
+  
+    <li><a href="/tags/chat/">chat</a><small>1</small></li>
+  
+    <li><a href="/tags/chrome/">chrome</a><small>1</small></li>
+  
+    <li><a href="/tags/cli/">cli</a><small>1</small></li>
+  
+    <li><a href="/tags/cloud-storage/">cloud-storage</a><small>1</small></li>
+  
+    <li><a href="/tags/cocoon/">cocoon</a><small>1</small></li>
+  
+    <li><a href="/tags/coding-style/">coding-style</a><small>1</small></li>
+  
+    <li><a href="/tags/coffeelint/">coffeelint</a><small>1</small></li>
+  
+    <li><a href="/tags/coffeescript/">coffeescript</a><small>7</small></li>
+  
+    <li><a href="/tags/command-history/">command-history</a><small>1</small></li>
+  
+    <li><a href="/tags/command-line/">command-line</a><small>1</small></li>
+  
+    <li><a href="/tags/command-line-interface/">command-line-interface</a><small>1</small></li>
+  
+    <li><a href="/tags/configuration/">configuration</a><small>1</small></li>
+  
+    <li><a href="/tags/crescent/">crescent</a><small>1</small></li>
+  
+    <li><a href="/tags/cron/">cron</a><small>2</small></li>
+  
+    <li><a href="/tags/crontab/">crontab</a><small>1</small></li>
+  
+    <li><a href="/tags/cryptography/">cryptography</a><small>1</small></li>
+  
+    <li><a href="/tags/custom-domain/">custom-domain</a><small>1</small></li>
+  
+    <li><a href="/tags/custom-generator/">custom-generator</a><small>1</small></li>
+  
+    <li><a href="/tags/cwd/">cwd</a><small>1</small></li>
+  
+    <li><a href="/tags/datagram/">datagram</a><small>1</small></li>
+  
+    <li><a href="/tags/date/">date</a><small>1</small></li>
+  
+    <li><a href="/tags/diff/">diff</a><small>1</small></li>
+  
+    <li><a href="/tags/distributed-team/">distributed-team</a><small>1</small></li>
+  
+    <li><a href="/tags/docco/">docco</a><small>1</small></li>
+  
+    <li><a href="/tags/echo/">echo</a><small>1</small></li>
+  
+    <li><a href="/tags/ecmascript-harmony/">ecmascript-harmony</a><small>1</small></li>
+  
+    <li><a href="/tags/encryption/">encryption</a><small>1</small></li>
+  
+    <li><a href="/tags/environment/">environment</a><small>2</small></li>
+  
+    <li><a href="/tags/environment-variable/">environment-variable</a><small>1</small></li>
+  
+    <li><a href="/tags/express/">express</a><small>1</small></li>
+  
+    <li><a href="/tags/file-system/">file-system</a><small>1</small></li>
+  
+    <li><a href="/tags/filename/">filename</a><small>1</small></li>
+  
+    <li><a href="/tags/fs/">fs</a><small>1</small></li>
+  
+    <li><a href="/tags/function/">function</a><small>3</small></li>
+  
+    <li><a href="/tags/function-declaration/">function-declaration</a><small>2</small></li>
+  
+    <li><a href="/tags/function-expression/">function-expression</a><small>3</small></li>
+  
+    <li><a href="/tags/function-innovation/">function-innovation</a><small>1</small></li>
+  
+    <li><a href="/tags/generator/">generator</a><small>1</small></li>
+  
+    <li><a href="/tags/get/">get</a><small>1</small></li>
+  
+    <li><a href="/tags/ghost/">ghost</a><small>1</small></li>
+  
+    <li><a href="/tags/github/">github</a><small>1</small></li>
+  
+    <li><a href="/tags/goal/">goal</a><small>1</small></li>
+  
+    <li><a href="/tags/google-keep/">google-keep</a><small>1</small></li>
+  
+    <li><a href="/tags/grunt/">grunt</a><small>1</small></li>
+  
+    <li><a href="/tags/grunt-contrib-jshint/">grunt-contrib-jshint</a><small>1</small></li>
+  
+    <li><a href="/tags/grunt-contrib-watch/">grunt-contrib-watch</a><small>1</small></li>
+  
+    <li><a href="/tags/guard/">guard</a><small>1</small></li>
+  
+    <li><a href="/tags/head/">head</a><small>2</small></li>
+  
+    <li><a href="/tags/hipchat/">hipchat</a><small>1</small></li>
+  
+    <li><a href="/tags/hong-kong/">hong-kong</a><small>1</small></li>
+  
+    <li><a href="/tags/hosted-zone/">hosted-zone</a><small>1</small></li>
+  
+    <li><a href="/tags/http/">http</a><small>1</small></li>
+  
+    <li><a href="/tags/id/">id</a><small>1</small></li>
+  
+    <li><a href="/tags/iife/">iife</a><small>2</small></li>
+  
+    <li><a href="/tags/immediately-invoked-function-expression/">immediately-invoked-function-expression</a><small>2</small></li>
+  
+    <li><a href="/tags/interpreter/">interpreter</a><small>1</small></li>
+  
+    <li><a href="/tags/javascript/">javascript</a><small>8</small></li>
+  
+    <li><a href="/tags/jelly-bean/">jelly-bean</a><small>1</small></li>
+  
+    <li><a href="/tags/join/">join</a><small>1</small></li>
+  
+    <li><a href="/tags/jshint/">jshint</a><small>1</small></li>
+  
+    <li><a href="/tags/json/">json</a><small>1</small></li>
+  
+    <li><a href="/tags/koa/">koa</a><small>1</small></li>
+  
+    <li><a href="/tags/line-divider/">line-divider</a><small>1</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>3</small></li>
+  
+    <li><a href="/tags/livereload/">livereload</a><small>1</small></li>
+  
+    <li><a href="/tags/markdown/">markdown</a><small>2</small></li>
+  
+    <li><a href="/tags/mi3/">mi3</a><small>1</small></li>
+  
+    <li><a href="/tags/mongodb/">mongodb</a><small>1</small></li>
+  
+    <li><a href="/tags/mongoexport/">mongoexport</a><small>1</small></li>
+  
+    <li><a href="/tags/multi-parts/">multi-parts</a><small>1</small></li>
+  
+    <li><a href="/tags/named-function/">named-function</a><small>1</small></li>
+  
+    <li><a href="/tags/nb/">nb</a><small>1</small></li>
+  
+    <li><a href="/tags/network/">network</a><small>1</small></li>
+  
+    <li><a href="/tags/new-orleans/">new-orleans</a><small>1</small></li>
+  
+    <li><a href="/tags/new-york/">new-york</a><small>1</small></li>
+  
+    <li><a href="/tags/node/">node</a><small>8</small></li>
+  
+    <li><a href="/tags/nodemon/">nodemon</a><small>1</small></li>
+  
+    <li><a href="/tags/normalization/">normalization</a><small>1</small></li>
+  
+    <li><a href="/tags/nota-bene/">nota-bene</a><small>1</small></li>
+  
+    <li><a href="/tags/note-well/">note-well</a><small>1</small></li>
+  
+    <li><a href="/tags/npm/">npm</a><small>1</small></li>
+  
+    <li><a href="/tags/npm-module/">npm-module</a><small>1</small></li>
+  
+    <li><a href="/tags/null/">null</a><small>1</small></li>
+  
+    <li><a href="/tags/object/">object</a><small>1</small></li>
+  
+    <li><a href="/tags/parseint/">parseint</a><small>1</small></li>
+  
+    <li><a href="/tags/path/">path</a><small>3</small></li>
+  
+    <li><a href="/tags/ping/">ping</a><small>1</small></li>
+  
+    <li><a href="/tags/preinstall/">preinstall</a><small>1</small></li>
+  
+    <li><a href="/tags/process/">process</a><small>1</small></li>
+  
+    <li><a href="/tags/proxy/">proxy</a><small>1</small></li>
+  
+    <li><a href="/tags/query-parameter/">query-parameter</a><small>1</small></li>
+  
+    <li><a href="/tags/record-set/">record-set</a><small>1</small></li>
+  
+    <li><a href="/tags/relative-path/">relative-path</a><small>1</small></li>
+  
+    <li><a href="/tags/remote-working/">remote-working</a><small>1</small></li>
+  
+    <li><a href="/tags/repl/">repl</a><small>1</small></li>
+  
+    <li><a href="/tags/require/">require</a><small>1</small></li>
+  
+    <li><a href="/tags/rlwrap/">rlwrap</a><small>1</small></li>
+  
+    <li><a href="/tags/route-53/">route-53</a><small>1</small></li>
+  
+    <li><a href="/tags/scaffolding/">scaffolding</a><small>1</small></li>
+  
+    <li><a href="/tags/script/">script</a><small>1</small></li>
+  
+    <li><a href="/tags/settings/">settings</a><small>1</small></li>
+  
+    <li><a href="/tags/shabang/">shabang</a><small>1</small></li>
+  
+    <li><a href="/tags/sharing/">sharing</a><small>1</small></li>
+  
+    <li><a href="/tags/shebang/">shebang</a><small>1</small></li>
+  
+    <li><a href="/tags/shell/">shell</a><small>1</small></li>
+  
+    <li><a href="/tags/shell-script/">shell-script</a><small>1</small></li>
+  
+    <li><a href="/tags/source-maps/">source-maps</a><small>1</small></li>
+  
+    <li><a href="/tags/split/">split</a><small>1</small></li>
+  
+    <li><a href="/tags/sshuttle/">sshuttle</a><small>1</small></li>
+  
+    <li><a href="/tags/startup/">startup</a><small>1</small></li>
+  
+    <li><a href="/tags/stats/">stats</a><small>1</small></li>
+  
+    <li><a href="/tags/success/">success</a><small>1</small></li>
+  
+    <li><a href="/tags/sync/">sync</a><small>1</small></li>
+  
+    <li><a href="/tags/time-zone/">time-zone</a><small>1</small></li>
+  
+    <li><a href="/tags/todo/">todo</a><small>1</small></li>
+  
+    <li><a href="/tags/train/">train</a><small>1</small></li>
+  
+    <li><a href="/tags/travel/">travel</a><small>1</small></li>
+  
+    <li><a href="/tags/tumblr/">tumblr</a><small>1</small></li>
+  
+    <li><a href="/tags/twitter/">twitter</a><small>1</small></li>
+  
+    <li><a href="/tags/ubuntu/">ubuntu</a><small>1</small></li>
+  
+    <li><a href="/tags/uglifyjs/">uglifyjs</a><small>1</small></li>
+  
+    <li><a href="/tags/underscore/">underscore</a><small>1</small></li>
+  
+    <li><a href="/tags/unix/">unix</a><small>1</small></li>
+  
+    <li><a href="/tags/username/">username</a><small>1</small></li>
+  
+    <li><a href="/tags/vim/">vim</a><small>2</small></li>
+  
+    <li><a href="/tags/vimdiff/">vimdiff</a><small>1</small></li>
+  
+    <li><a href="/tags/vpn/">vpn</a><small>1</small></li>
+  
+    <li><a href="/tags/web-framework/">web-framework</a><small>1</small></li>
+  
+    <li><a href="/tags/xiaomi/">xiaomi</a><small>1</small></li>
+  
+    <li><a href="/tags/yeoman/">yeoman</a><small>1</small></li>
+  
+    <li><a href="/tags/yield/">yield</a><small>1</small></li>
+  
+    <li><a href="/tags/小米/">小米</a><small>1</small></li>
+  
+    <li><a href="/tags/小米手机/">小米手机</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Chao Huang
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
