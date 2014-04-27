@@ -20,16 +20,21 @@ archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
 
+# Directory
+source_dir: source
+public_dir: public
+
 # Writing
 new_post_name: :year-:month-:day-:title.md # File name of new posts
 default_layout: post
 auto_spacing: true # Add spaces between asian characters and western characters
 titlecase: false # Transform title into titlecase
-external_link: false # Open external links in new tab
+external_link: true # Open external links in new tab
 max_open_file: 100
 multi_thread: true
 filename_case: 1
 render_drafts: false
+post_asset_folder: false
 highlight:
   enable: true
   backtick_code_block: true
@@ -76,11 +81,26 @@ disqus_shortname:
 # Extensions
 ## Plugins: https://github.com/tommy351/hexo/wiki/Plugins
 ## Themes: https://github.com/tommy351/hexo/wiki/Themes
-theme: light
+theme: landscape
 exclude_generator:
 
+# Markdown
+## https://github.com/chjj/marked
+markdown:
+  gfm: true
+  pedantic: false
+  sanitize: false
+  tables: true
+  breaks: true
+  smartLists: true
+  smartypants: true
+
+# Stylus
+stylus:
+  compress: false
+
 # Deployment
-## Docs: http://zespia.tw/hexo/docs/deploy.html
+## Docs: http://zespia.tw/hexo/docs/deployment.html
 deploy:
   type: github
   repository: git@github.com:realguess/realguess.github.com.git
