@@ -28,7 +28,7 @@ fancybox: true
 google_analytics: UA-45698182-1
 rss:
 
-comment_provider: facebook
+comment_provider:
 
 # Facebook comment
 facebook:
