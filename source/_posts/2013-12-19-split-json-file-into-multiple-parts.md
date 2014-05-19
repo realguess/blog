@@ -7,7 +7,7 @@ tags: [split, json, multi-parts, mongodb, mongoexport, awk]
 
     $ mongoexport -d mydb -c mycollection -o myfile.json --jsonArray
 
-The `--jsonArray` option writes the entire content of the export as a single JSON array. Sometimes, the size of individual file is quite large, we need to break it down into small pieces, because most web servers will have a limit on how much data can be submitted at once. However, with the option, the entire document is a single line. Any line processing command cannot be easily used. We can omit the option (default behavior) and have the export utility to dump it one document at a time. The entire exported JSON file is technically not in correct JSON format, but each line, which represents a MongoDB document, is valid JSON, and can be used to do some command line processing.
+The `--jsonArray` option writes the entire content of the export as a single JSON array. Sometimes, the size of individual file is quite large, we need to break it down into small pieces, because most web servers will have a limit on how much data can be submitted at once. However, with the option, the entire document is a single line. Any line processing command cannot be easily used. (If you are looking to do so, you can use `jq` to [split a large JSON file into smaller pieces].) We can omit the option (default behavior) and have the export utility to dump it one document at a time. The entire exported JSON file is technically not in correct JSON format, but each line, which represents a MongoDB document, is valid JSON, and can be used to do some command line processing.
 
 To break a large file into many smaller pieces, we can use `split` command:
 
@@ -34,3 +34,5 @@ Unless breaking the file into one line at a time, otherwise, we need to convert 
 The output JSON file will contains an array of MongoDB documents. The main idea of the AWK script is to print out previous line as it reads the current line. `BEGIN { l = "[" }` defines the first line as the opening square bracket, and the `END { print $0"\n" }` prints the last line of the file and the closing square bracket.
 
 There bounds to be a better way. Just need to keep looking.
+
+[split a large JSON file into smaller pieces]: /2014/05/18/split-a-large-json-file-into-smaller-pieces/
