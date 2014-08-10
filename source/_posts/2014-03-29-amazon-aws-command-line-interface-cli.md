@@ -10,8 +10,7 @@ This is a brief guide for installing [AWS Command Line Interface (CLI)][cli] on 
 The point here is **unified**, one tool to run all Amazon AWS services.
 
 
-Install
--------
+## Install
 
 _The installation procedure applies to Ubuntu Linux with Zsh and Bash._
 
@@ -50,8 +49,7 @@ Test autocompletion:
 You should see a list of all available AWS commands.
 
 
-Usage
------
+## Usage
 
 Before using aws-cli, you need to tell it about your AWS credentials. There are three ways to specify AWS credentials:
 
@@ -79,16 +77,18 @@ This will print a nice looking table of all EC2 instances.
 The command line options also accept JSON format. But when passing in large blocks of data, referring a JSON file is much easier. Both local file and remote URL can be used.
 
 
-Upgrade
--------
+## Upgrade
 
-To upgrade AWS CLI to the latest version:
+Check the installed and the latest versions:
+
+    $ pip search awscli
+
+Upgrade AWS CLI to the latest version:
 
     $ sudo pip install --upgrade awscli
 
 
-References
-----------
+## References
 
 1. [AWS Command Line Interface][cli]
 2. [User Guide][userguide]
