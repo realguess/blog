@@ -1,6 +1,6 @@
 # Hexo Configuration
-## Docs: http://zespia.tw/hexo/docs/configure.html
-## Source: https://github.com/tommy351/hexo/
+## Docs: http://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
 
 # Site
 title: realguess
@@ -19,6 +19,7 @@ tag_dir: tags
 archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
+permalink_defaults:
 
 # Directory
 source_dir: source
@@ -35,6 +36,7 @@ multi_thread: true
 filename_case: 1
 render_drafts: false
 post_asset_folder: false
+relative_link: false
 highlight:
   enable: true
   backtick_code_block: true
@@ -60,8 +62,9 @@ tag: 2
 ## You can customize the logger format as defined in
 ## http://www.senchalabs.org/connect/logger.html
 port: 4000
+server_ip: localhost
 logger: false
-logger_format:
+logger_format: dev
 
 # Date / Time format
 ## Hexo uses Moment.js to parse and display date
@@ -79,8 +82,8 @@ pagination_dir: page
 disqus_shortname: realguess
 
 # Extensions
-## Plugins: https://github.com/tommy351/hexo/wiki/Plugins
-## Themes: https://github.com/tommy351/hexo/wiki/Themes
+## Plugins: https://github.com/hexojs/hexo/wiki/Plugins
+## Themes: https://github.com/hexojs/hexo/wiki/Themes
 theme: light
 exclude_generator:
 
@@ -100,7 +103,7 @@ stylus:
   compress: false
 
 # Deployment
-## Docs: http://zespia.tw/hexo/docs/deployment.html
+## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: github
   repository: git@github.com:realguess/realguess.github.com.git
