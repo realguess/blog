@@ -1,5 +1,6 @@
 title: Non-Interactive Redis Install
 date: 2014-07-19 21:13:44
+categories: [Tools]
 tags: [redis, install, interactive, shell, read]
 ---
 

@@ -1,5 +1,6 @@
 title: Dirname Does Not Follow Symlink
 date: 2014-09-20 11:22:33
+categories: [Programming]
 tags: [dirname, symlink, symbolic-link, path, best-practice, node]
 ---
 

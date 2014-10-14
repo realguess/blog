@@ -1,3 +1,7 @@
 title: {{ title }}
-tags:
+date: {{ date }}
+categories: [Uncategorized]
+tags: [draft]
 ---
+
+<!-- more -->
