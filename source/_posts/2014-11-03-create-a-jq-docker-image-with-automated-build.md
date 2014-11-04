@@ -38,7 +38,7 @@ It should give me two image layers with the two different image IDs, which makes
 
 After a while, the index should be built, and I can search it via:
 
-```
+```sh
 $ docker search jq
 NAME             DESCRIPTION              STARS    OFFICIAL   AUTOMATED
 realguess/jq                              1                   [OK]
