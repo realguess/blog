@@ -1,5 +1,6 @@
 title: Live Browser Reload and Command Execution on File Change
 date: 2013-11-12 12:32:34
+categories: [Tools]
 tags: [nodemon, docco, grunt-contrib-watch, livereload, guard, todo]
 ---
 
