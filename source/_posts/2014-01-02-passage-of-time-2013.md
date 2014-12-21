@@ -1,5 +1,6 @@
 title: Passage of Time 2013
 date: 2014-01-02 21:59:01
+categories: [Statistics]
 tags: [2013, stats]
 ---
 
