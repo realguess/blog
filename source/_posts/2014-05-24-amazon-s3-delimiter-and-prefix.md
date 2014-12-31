@@ -1,5 +1,6 @@
 title: Amazon S3 Delimiter and Prefix
 date: 2014-05-24 22:17:41
+categories: [Cloud]
 tags: [delimiter, prefix, directory, folder, s3, aws, amazon, listobjects, aws-sdk, javascript]
 ---
 

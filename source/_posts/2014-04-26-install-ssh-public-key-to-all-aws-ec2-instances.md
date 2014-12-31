@@ -1,5 +1,6 @@
 title: Install SSH Public Key to All AWS EC2 Instances
 date: 2014-04-26 17:30:46
+categories: [Tools]
 tags: [ssh-copy-id, ssh, ec2, aws]
 ---
 
