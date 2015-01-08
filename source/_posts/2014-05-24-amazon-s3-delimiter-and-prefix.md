@@ -1,7 +1,7 @@
 title: Amazon S3 Delimiter and Prefix
 date: 2014-05-24 22:17:41
 categories: [Cloud]
-tags: [delimiter, prefix, directory, folder, s3, aws, amazon, listobjects, aws-sdk, javascript]
+tags: [delimiter, prefix, directory, folder, amazon-s3, aws, amazon, listobjects, aws-sdk, javascript]
 ---
 
 [Amazon S3] is an inexpensive online file storage service, and there is the [JavaScript SDK] to use. There are things puzzling me when using the SDK were:
