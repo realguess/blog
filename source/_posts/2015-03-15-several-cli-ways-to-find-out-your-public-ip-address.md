@@ -10,4 +10,7 @@ Need to know your public IP address? Use one of the following:
 $ curl -s checkip.amazonaws.com
 $ curl -s ipinfo.io/ip
 $ curl -s www.trackip.net/ip
+$ curl -s whatsmyip.me
+$ curl -s whatismyip.akamai.com
+$ curl -s icanhazip.com
 ```
