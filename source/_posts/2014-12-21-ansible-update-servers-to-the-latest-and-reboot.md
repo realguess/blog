@@ -158,7 +158,7 @@ In summary, adding the reboot tasks and putting them all together in an Ansible 
 
 - name: Upgrade all packages to the latest version
   apt: update_cache=yes upgrade=dist
-  when: packages.stdout != ""
+  when: packages.stderr != ""
 
 - name: Check if a reboot is required
   register: file
