@@ -1,6 +1,6 @@
 title: Restart Upstart Instances on System Reboot
 date: 2014-11-23 12:00:00
-categories: [Programming]
+categories: [Coding]
 tags: [upstart, restart, reboot, multiple]
 ---
 

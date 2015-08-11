@@ -1,6 +1,6 @@
 title: Synchronous Console Methods
 date: 2014-11-02 12:00:00
-categories: [Programming]
+categories: [Coding]
 tags: [synchronous, asynchronous, console, log, node]
 ---
 
