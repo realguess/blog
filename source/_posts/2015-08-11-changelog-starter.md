@@ -6,8 +6,12 @@ tags: [changelog, programming-style, coding-style, starter]
 
 A [changelog] starter to be consistent with my coding style:
 
-[changelog]: https://en.wikipedia.org/wiki/Changelog
+ - Two header levels only with setext style.
+ - Use underlines for first-level headers and dashes for second-level headers.
+ - Each release is a section, hence use second-level header.
+ - Each category in a release is not a section, hence use emphasis with double asterisks.
 
+[changelog]: https://en.wikipedia.org/wiki/Changelog
 
 
 ```md
@@ -35,62 +39,62 @@ _The guideline attempts to follow [Keep a CHANGELOG][1]._
 0.1.0 / 2015-01-01
 ------------------
 
-### Security
+**Security**
 
- * Inform users to upgrade for vulnerabilities.
+ - Inform users to upgrade for vulnerabilities.
 
-### Removed
+**Removed**
 
- * Remove a deprecated feature in this release.
+ - Remove a deprecated feature in this release.
 
-### Deprecated
+**Deprecated**
 
- * Deprecate a feature in the upcoming release.
+ - Deprecate a feature in the upcoming release.
 
-### Changed
+**Changed**
 
- * Change an existing functionality.
+ - Change an existing functionality.
 
-### Added
+**Added**
 
- * Add a new feature.
+ - Add a new feature.
 
-### Fixed
+**Fixed**
 
- * Fix a bug.
+ - Fix a bug.
 
 
 Example / YYYY-MM-DD
 --------------------
 
-### Security
+**Security**
 
- * Inform users to upgrade for vulnerabilities.
- * Each sentence must use the present tense and ends with a period.
+ - Inform users to upgrade for vulnerabilities.
+ - Each sentence must use the present tense and ends with a period.
 
-### Removed
+**Removed**
 
- * Remove a deprecated feature in this release.
- * Basic Authentication is dropped in favor of Digest Authentication.
+ - Remove a deprecated feature in this release.
+ - Basic Authentication is dropped in favor of Digest Authentication.
 
-### Deprecated
+**Deprecated**
 
- * Deprecate a feature in the upcoming release.
- * Basic Authentication will be replaced by Digest Authentication in the next
+ - Deprecate a feature in the upcoming release.
+ - Basic Authentication will be replaced by Digest Authentication in the next
    release.
 
-### Changed
+**Changed**
 
- * Change an existing functionality.
- * User session data is added to the user object upon initialization.
+ - Change an existing functionality.
+ - User session data is added to the user object upon initialization.
 
-### Added
+**Added**
 
- * Add a new feature.
- * A new endpoint `/users` is added to handle user CRUD.
+ - Add a new feature.
+ - A new endpoint `/users` is added to handle user CRUD.
 
-### Fixed
+**Fixed**
 
- * Fix a bug.
- * Add the default case to handle unknown cases in user group assigning.
+ - Fix a bug.
+ - Add the default case to handle unknown cases in user group assigning.
 ```
