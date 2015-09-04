@@ -1,7 +1,7 @@
 title: Locate HTTP Port Number from http.Server Instance
 date: 2015-03-28 12:00:00
-categories: [Node.js and io.js]
-tags: [random, port, http, server, express, koa]
+categories: [JavaScript]
+tags: [random, port, http, server, express, koa, node]
 ---
 
 This is a bare minimal HTTP server:

@@ -1,7 +1,7 @@
 title: Use Array of Middleware in Koa Router
 date: 2015-03-18 12:00:00
-categories: [Node.js and io.js]
-tags: [koa-router, koa-compose, koa, middleware, array]
+categories: [JavaScript]
+tags: [koa-router, koa-compose, koa, middleware, array, node]
 ---
 
 [Koa Router] _v4.2_ does not support an array of middleware, multiple middleware must be entered one by one:

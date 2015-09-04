@@ -1,7 +1,7 @@
 title: Test Execution Order in Mocha
 date: 2015-04-01 12:00:00
-categories: [Node.js and io.js]
-tags: [order, synchronous, asynchronous, mocha, test]
+categories: [JavaScript]
+tags: [order, synchronous, asynchronous, mocha, test, node]
 ---
 
 In synchronous tests, both `describe` and `it` statements are executed in the order they are laid out.

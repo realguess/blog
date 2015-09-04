@@ -1,6 +1,6 @@
 title: "What is the 'this' Binding in Async 'seq' and 'compose' Functions?"
 date: 2015-07-11 12:00:00
-categories: [Node.js and io.js]
+categories: [JavaScript]
 tags: [this, binding, async, seq, compose, node]
 ---
 

@@ -1,6 +1,6 @@
 title: Use PM2 with io.js
 date: 2015-03-14 12:00:00
-categories: [Node.js and io.js]
+categories: [JavaScript]
 tags: [pm2, iojs]
 ---
 

@@ -1,7 +1,7 @@
 title: "Fields in 'package.json' for Private and Unlicensed Modules"
 date: 2015-07-06 12:00:00
-categories: [Node.js and io.js]
-tags: [license, package.json, npm]
+categories: [JavaScript]
+tags: [license, package.json, npm, node]
 ---
 
 If you not include the `license` field in `package.json`, [npm] will keep bugging you:

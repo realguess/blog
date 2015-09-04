@@ -1,6 +1,6 @@
 title: Various Node.js Installation Methods
 date: 2015-09-02 12:00:00
-categories: [Node.js and io.js]
+categories: [JavaScript]
 tags: [install, node, iojs]
 ---
 

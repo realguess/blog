@@ -1,6 +1,6 @@
 title: Require Modules from the Command Line
 date: 2015-04-02 12:00:00
-categories: [Node.js and io.js]
+categories: [JavaScript]
 tags: [require, module, cli, iojs]
 ---
 

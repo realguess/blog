@@ -1,7 +1,7 @@
 title: Run LoDash in Context to Change Template Settings
 date: 2015-07-22 12:00:00
-categories: [Node.js and io.js]
-tags: [lodash, template, context, module-caching]
+categories: [JavaScript]
+tags: [lodash, template, context, module-caching, node]
 ---
 
 [LoDash] has `_.template` function:

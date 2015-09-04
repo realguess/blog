@@ -1,7 +1,7 @@
 title: "SuperTest: Listen at Random Port"
 date: 2015-03-29 12:00:00
-categories: [Node.js and io.js]
-tags: [random, ephemeral, port, supertest, http, express, koa]
+categories: [JavaScript]
+tags: [random, ephemeral, port, supertest, http, express, koa, node]
 ---
 
 In the example section of [SuperTest] (_v0.15.0_), it mentions something about _ephemeral port_:
