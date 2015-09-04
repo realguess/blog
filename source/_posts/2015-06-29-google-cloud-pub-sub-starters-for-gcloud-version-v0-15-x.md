@@ -1,7 +1,7 @@
 title: Google Cloud Pub/Sub Starters for gcloud Version v0.15.x
 date: 2015-06-29 12:00:00
-categories: [Starters]
-tags: [google-cloud-pubsub, node, topic, subscription, gcloud]
+categories: [Cloud]
+tags: [starter, template, google-cloud-pubsub, node, topic, subscription, gcloud]
 ---
 
 [Google Cloud Pub/Sub] starters/examples/references for [Node.js] gcloud version v0.15.x.
