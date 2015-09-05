@@ -1,6 +1,6 @@
 title: Install Docker and then Run Docker Commands without Sudo
 date: 2015-02-11 12:00:00
-categories: [Tools]
+categories: [DevOps]
 tags: [docker, install, sudo]
 ---
 
