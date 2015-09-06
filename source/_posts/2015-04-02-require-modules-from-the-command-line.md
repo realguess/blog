@@ -1,7 +1,7 @@
 title: Require Modules from the Command Line
 date: 2015-04-02 12:00:00
 categories: [JavaScript]
-tags: [require, module, cli, iojs]
+tags: [require, module, command-line, cli, iojs]
 ---
 
 [io.js] v1.6.0 introduces a new command line option: `-r` or `--require`, which can be used to pre-load modules at startup, see:

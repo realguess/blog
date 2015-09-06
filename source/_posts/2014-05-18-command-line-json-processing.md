@@ -1,6 +1,6 @@
 title: Command Line JSON Processing
 date: 2014-05-18 14:49:04
-tags: [jq, json, command-line]
+tags: [jq, json, command-line, cli]
 ---
 
 What is the best command line tool to process JSON?

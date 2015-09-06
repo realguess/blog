@@ -1,7 +1,7 @@
 title: Delete All Messages in an Amazon SQS Queue via AWS CLI
 date: 2014-11-28 12:00:00
-categories: [Tools]
-tags: [amazon-sqs, aws-cli, queue, jq, cli, aws, amazon]
+categories: [Cloud]
+tags: [amazon-sqs, aws-cli, queue, jq, command-line, cli, aws, amazon]
 ---
 
 [Amazon SQS] or Simple Queue Service is a fast, reliable, scalable, fully managed message queuing service. There is also [AWS CLI] or Command Line Interface available to use with the service.

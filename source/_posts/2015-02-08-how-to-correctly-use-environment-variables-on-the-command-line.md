@@ -1,7 +1,7 @@
 title: How to Correctly Use Environment Variables on the Command Line
 date: 2015-02-08 12:00:00
 categories: [Linux]
-tags: [shell-expansion, environment-variable, shell, cli]
+tags: [shell-expansion, environment-variable, shell, command-line, cli]
 ---
 
 I always forget about how to use shell environment variable correctly. I think because I did not grasp the key concept. For example, here is the wrong approach:

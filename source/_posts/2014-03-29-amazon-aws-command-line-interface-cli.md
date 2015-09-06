@@ -1,7 +1,7 @@
 title: Amazon AWS Command Line Interface (CLI)
 date: 2014-03-29 10:44:53
 categories: [Tools]
-tags: [aws-cli, command-line-interface, cli, aws]
+tags: [aws-cli, command-line, cli, aws]
 ---
 
 This is a brief guide for installing [AWS Command Line Interface (CLI)][cli] on Ubuntu Linux.

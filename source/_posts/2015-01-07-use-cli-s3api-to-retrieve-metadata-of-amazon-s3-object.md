@@ -1,8 +1,7 @@
 title: Use CLI s3api to Retrieve Metadata of Amazon S3 Object
 date: 2015-01-07 12:00:00
-
-categories: [Tools]
-tags: [amazon-s3api, amazon-s3, aws-cli, aws, cli, amazon]
+categories: [Cloud]
+tags: [amazon-s3api, amazon-s3, aws-cli, aws, command-line, cli, amazon]
 ---
 
 In [Amazon S3 CLI], there are only a handful commands:

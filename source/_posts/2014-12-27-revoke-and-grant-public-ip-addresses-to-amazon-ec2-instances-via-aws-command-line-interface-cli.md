@@ -1,7 +1,7 @@
 title: Revoke and Grant Public IP Addresses to Amazon EC2 Instances Via AWS Command Line Interface (CLI)
 date: 2014-12-27 12:00:00
-categories: [Tools]
-tags: [aws-cli, cli, security-group, ec2, aws, amazon, automation, ip-address]
+categories: [Cloud]
+tags: [aws-cli, command-line, cli, security-group, ec2, aws, amazon, automation, ip-address]
 ---
 
 If you work from place to place, such as from one coffee shop to another, and you need access to your Amazon EC2 instances, but you don't want to allow traffics from all IP addresses. You can use the EC2 [Security Groups] to allow the IP addresses from those locations. But once you move on to a different location, you want to delete the IP address from the previous location. The process to do these manually and over and over again quickly becomes cumbersome. Here is a command line method that quickly removes all other locations and allows only the traffic from your current location.

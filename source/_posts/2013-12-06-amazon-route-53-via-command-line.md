@@ -1,7 +1,7 @@
 title: Amazon Route 53 via Command Line
 date: 2013-12-06 10:55:55
-categories: [Tools]
-tags: [command-line, hosted-zone, record-set, aws, route-53, amazon]
+categories: [Cloud]
+tags: [command-line, cli, hosted-zone, record-set, aws, route-53, amazon]
 ---
 
 Retrieve a list of hosted zones:
