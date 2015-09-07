@@ -44,7 +44,6 @@ Clone the Node.js repository from GitHub:
 
 ```sh
 $ git clone https://github.com/nodejs/node.git
-
 ```
 
 Future Node.js releases will be from this repo: <https://github.com/nodejs/node>.
