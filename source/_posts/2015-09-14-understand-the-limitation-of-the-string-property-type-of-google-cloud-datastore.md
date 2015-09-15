@@ -106,7 +106,7 @@ if (size > 1024 * 1024 - 91) {
 }
 ```
 
-Anything large than 1MB should be better stored in [Google Cloud Storage].
+Anything larger than 1MB should be better stored in [Google Cloud Storage].
 
 But when working with JSON based API, it's better to limit the actual size to much less, like 1 KB. Because when getting a list of posts, usually 20 posts are returned. If allowing 1 MB for each post, then there will be more than 20 MB for each query. Therefore, it's better to limit the string field to a much smaller value. Even you can do it, it does not mean you have to do it.
 
