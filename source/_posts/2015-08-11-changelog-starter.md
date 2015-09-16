@@ -1,7 +1,7 @@
 title: Changelog Starter
 date: 2015-08-11 12:00:00
 categories: [Coding]
-tags: [changelog, programming-style, coding-style, starter]
+tags: [changelog, coding-style, starter]
 ---
 
 A [changelog] starter to be consistent with my coding style:
