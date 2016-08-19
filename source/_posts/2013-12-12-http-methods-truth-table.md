@@ -1,14 +1,14 @@
 title: HTTP Methods Truth Table
-tags:
+date: 2013-12-12 12:00:00
+categories: [Computing]
+tags: [http, http-method, resource, get, post, put, patch, delete, batch]
 ---
 
-Progress:
-
-1. Review the HTTP method documentation.
-2. Post it to StackOverflow or quora.
+My take on on HTTP methods and resources:
 
 
 ```
+
 +-----------------------------------------------------------+
 | # | Request-URI              | Method         | RE  | RNE |
 +-----------------------------------------------------------+
@@ -40,9 +40,3 @@ Notes:
    array, therefore, status code `204` is not used.
 4. There are two situation, a new resource is being created, then the `Location`
    header must indicate the fully qualified resource URI.
-
-Questions:
-
-1. Are naming of resource/entity correct? Resource is a collection of entitites.
-2. Is not implementing #3 `POST /resources/entity` bad?
-3. Anything wrong?
