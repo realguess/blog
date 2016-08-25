@@ -1,6 +1,6 @@
 title: Node.js Installation Methods July 2016 Edition
 date: 2016-07-05T12:00:00  
-categories: [Coding]  
+categories: [DevOps]  
 tags: [install, node, nodesource, dockerfile]
 
 ---

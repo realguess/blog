@@ -1,6 +1,7 @@
 title: Traveling from the Big Apple to the Big Easy via Amtrak Crescent
 date: 2014-03-07 22:30:00
-tags: [travel, train, amtrak, crescent, big-apple, new-york, big-easy, new-orleans]
+categories: [Travel]
+tags: [train, amtrak, crescent, big-apple, new-york, big-easy, new-orleans]
 ---
 
 ![Amtrak Crescent](http://farm3.staticflickr.com/2839/13234934445_e1c993a278_n.jpg)
@@ -35,8 +36,8 @@ On the Amtrak Crescent line, the train is called [Viewliner]. Viewliner is small
 
 The top windows on the car are for people who sleeping on the upper bunk in the room. That is really helpful for me to catch the outside view without climbing up and down.
 
-[viewliner]: http://en.wikipedia.org/wiki/Viewliner
-[superliner]: http://en.wikipedia.org/wiki/Superliner_(railcar)
+[viewliner]: https://en.wikipedia.org/wiki/Viewliner
+[superliner]: https://en.wikipedia.org/wiki/Superliner_(railcar)
 
 
 The Car and the Room
@@ -126,4 +127,4 @@ This is the road trip without driving. Driving is better, because you are in cha
 
 Next: [Traveling via Amtrak Sunset Limited][sunset-limited]
 
-[sunset-limited]: /2014/03/14/traveling-from-the-big-easy-to-the-hollywood-via-amtrak-sunset-limited/
+[sunset-limited]: /2014/03/14/traveling-from-the-big-easy-to-hollywood-via-amtrak-sunset-limited/
